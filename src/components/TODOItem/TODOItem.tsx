@@ -11,6 +11,7 @@ interface Props {
 }
 
 // TODO set deleted. If in edit mode, show a different item.
+// TODO change this to a PendingListItem, and render a edit item or regular item.
 export const TODOItem: FC<Props> = observer(({todo}) => {
     return (
         <S.TODOContainer>

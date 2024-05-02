@@ -11,6 +11,7 @@ interface Props {
 }
 
 export const PendingList: FC<Props> = observer(({todos}) => {
+    // TODO instead of TODOItem on line 27 a PendingListItem should be rendered.
     return (
         <div>
             <S.PendingListHeadingContainer>
