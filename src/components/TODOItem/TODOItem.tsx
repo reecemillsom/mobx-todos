@@ -15,7 +15,8 @@ export const TODOItem: FC<Props> = observer(({todo}) => {
     return (
         <S.TODOContainer>
             <S.TODOContentContainer>
-                {todo?.editing ? <Input placeholder="Enter TODO"/> : <span>{todo?.text}</span>}
+                {todo?.editing ? <Input placeholder="Enter TODO" value={todo?.text}
+                                        onChange={(e) => todo?.setText(e?.target?.value)}/> : <span>{todo?.text}</span>}
             </S.TODOContentContainer>
             <S.TODOButtonsContainer>
                 <S.StateButton aria-label="Edit" onClick={() => todo.setEditing(true)} icon={<EditIcon/>}/>

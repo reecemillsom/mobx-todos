@@ -10,15 +10,8 @@ function App() {
     return (
         <S.Container className="App">
             <S.HeaderContainer>
-                <Heading>TODO List</Heading>
+                <Heading as="h1">TODO List</Heading>
             </S.HeaderContainer>
-            <S.AddItemContainer>
-                <Stack direction='row' spacing={4}>
-                    <Button rightIcon={<SmallAddIcon/>} variant="solid" onClick={() => todos?.createTodo()}>
-                        Add TODO
-                    </Button>
-                </Stack>
-            </S.AddItemContainer>
             <TODOList todos={todos}/>
         </S.Container>
     );

@@ -8,7 +8,7 @@ export const HeaderContainer = styled.div`
 
 export const AddItemContainer = styled.div`
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-bottom: 16px;
 `;
 

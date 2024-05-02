@@ -5,10 +5,19 @@ export const TODOContainer = styled.div`
     display: flex;
     justify-content: space-between;
     padding: 16px;
-    border: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 
-    &:not(:last-child) {
-        border-bottom: none;
+    &:first-child {
+        border-top: 1px solid black;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid black;
+        }
+    }
+
+    &:last-child {
+        border-bottom: 1px solid black;
     }
 `
 

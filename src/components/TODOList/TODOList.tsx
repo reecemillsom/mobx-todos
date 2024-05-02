@@ -1,7 +1,8 @@
-import {FC} from "react";
+import React, {FC} from "react";
 import {observer} from "mobx-react";
 import TODOs from "../../models/TODOs/TODOs";
-import {TODOItem} from "../TODOItem/TODOItem";
+import {PendingList} from "./PendingList";
+import {CompletedList} from "./CompletedList";
 
 interface Props {
     todos: TODOs;
@@ -9,8 +10,10 @@ interface Props {
 
 export const TODOList: FC<Props> = observer(({todos}) => {
     return (
-        <>
-            {todos?.todos.map(todo => <TODOItem todo={todo} key={todo.id}/>)}
-        </>
+        <div>
+            <PendingList todos={todos}/>
+
+            <CompletedList todos={todos}/>
+        </div>
     );
 });
