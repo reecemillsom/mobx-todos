@@ -1,18 +1,13 @@
 import styled from "styled-components";
 
+export const Container = styled.div`
+    width: 75%;
+    margin: 0 auto;
+`;
+
 export const HeaderContainer = styled.div`
     display: flex;
     justify-content: center;
     margin: 16px 0;
 `;
 
-export const AddItemContainer = styled.div`
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 16px;
-`;
-
-export const Container = styled.div`
-    width: 75%;
-    margin: 0 auto;
-`;

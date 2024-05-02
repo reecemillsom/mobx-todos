@@ -3,6 +3,7 @@ import {observer} from "mobx-react";
 import {Heading} from "@chakra-ui/react";
 import TODOs from "../../models/TODOs/TODOs";
 import {CompletedItem} from "../TODOItem/CompletedItem";
+import * as S from './styles';
 
 interface Props {
     todos: TODOs;
@@ -11,7 +12,9 @@ interface Props {
 export const CompletedList: FC<Props> = observer(({todos}) => {
     return (
         <div>
-            <Heading as="h2" style={{marginTop: '16px', marginBottom: '16px'}}>Completed</Heading>
+            <S.CompleteListHeadingContainer>
+                <Heading as="h2">Completed</Heading>
+            </S.CompleteListHeadingContainer>
             <div>{todos?.completedItems.map(todo => <CompletedItem todo={todo} key={todo.id}/>)}</div>
         </div>
     )
