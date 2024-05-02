@@ -1,8 +1,7 @@
 import React from 'react';
 import TODOs from "./models/TODOs/TODOs";
 import {TODOList} from "./components/TODOList/TODOList";
-import {Heading, Button, Stack} from "@chakra-ui/react";
-import {SmallAddIcon} from "@chakra-ui/icons";
+import {Heading} from "@chakra-ui/react";
 import * as S from './AppStyles';
 
 function App() {

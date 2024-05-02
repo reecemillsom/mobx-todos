@@ -10,10 +10,10 @@ interface Props {
 
 export const TODOList: FC<Props> = observer(({todos}) => {
     return (
-        <div>
+        <>
             <PendingList todos={todos}/>
 
             <CompletedList todos={todos}/>
-        </div>
+        </>
     );
 });

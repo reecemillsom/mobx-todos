@@ -1,24 +1,10 @@
 import styled from "styled-components";
 import {IconButton} from "@chakra-ui/react";
+import {listContainer} from "./listStyles";
 
 export const TODOContainer = styled.div`
-    display: flex;
+    ${listContainer};
     justify-content: space-between;
-    padding: 16px;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-
-    &:first-child {
-        border-top: 1px solid black;
-
-        &:not(:last-child) {
-            border-bottom: 1px solid black;
-        }
-    }
-
-    &:last-child {
-        border-bottom: 1px solid black;
-    }
 `
 
 export const TODOContentContainer = styled.div`
@@ -36,3 +22,8 @@ export const StateButton = styled(IconButton)`
         margin-right: 8px;
     }
 `;
+
+export const CompletedItemContainer = styled.div`
+    ${listContainer};
+    justify-content: flex-start;
+`
