@@ -5,6 +5,7 @@ import {SmallAddIcon} from "@chakra-ui/icons";
 import {TODOItem} from "../TODOItem/TODOItem";
 import TODOs from "../../models/TODOs/TODOs";
 import * as S from './styles';
+import {NothingToShow} from "../NothingToShow/NothingToShow";
 
 interface Props {
     todos: TODOs;
@@ -24,8 +25,12 @@ export const PendingList: FC<Props> = observer(({todos}) => {
                 </Stack>
             </S.PendingListHeadingContainer>
 
-            <div>{todos?.pendingItems.map(todo => <TODOItem todo={todo} removeTodo={todos?.removeTodo}
-                                                            key={todo.id}/>)}</div>
+            {!todos?.pendingItems?.length ? (
+                <NothingToShow text={"No Pending TODOs"}/>
+            ) : (
+                <div>{todos?.pendingItems.map(todo => <TODOItem todo={todo} removeTodo={todos?.removeTodo}
+                                                                key={todo.id}/>)}</div>
+            )}
         </div>
     )
 })
