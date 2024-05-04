@@ -6,9 +6,17 @@ interface TODOData {
     completed: boolean;
 }
 
+interface Text {
+    original: string;
+    updated: string;
+}
+
 export default class TODO {
     id: string = uuidv4();
-    text: string = '';
+    text: Text = {
+        original: '',
+        updated: ''
+    };
     editing: boolean = false;
     completed: boolean = false;
     deleted: boolean = false;
@@ -24,12 +32,12 @@ export default class TODO {
             setDeleted: action,
         });
 
-        this.setText(data?.text ?? '');
+        this.setText(data?.text ?? '', 'original');
         data?.completed && this.setCompleted();
     }
 
-    setText(text: string) {
-        this.text = text;
+    setText(text: string, field: keyof Text) {
+        this.text[field] = text;
     }
 
     setEditing(editing: boolean) {
@@ -44,7 +52,7 @@ export default class TODO {
         this.deleted = true;
     }
 
-    getText(): string {
+    getText(): Text {
         return this.text;
     }
 
@@ -58,5 +66,16 @@ export default class TODO {
 
     getDeleted(): boolean {
         return this.deleted;
+    }
+
+    acceptEdit(): void {
+        this.setText(this.text?.updated, 'original');
+        this.setText('', 'updated');
+        this.setEditing(false)
+    }
+
+    cancelEdit(): void {
+        this.setText(this.text?.original, 'updated');
+        this.setEditing(false);
     }
 }

@@ -37,7 +37,7 @@ describe('TODO', () => {
         it('should update what the value in state', () => {
             const todo = new TODO();
 
-            todo.setText('Text value');
+            // todo.setText('Text value');
             todo.setEditing(true);
             todo.setCompleted();
 

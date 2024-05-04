@@ -9,7 +9,7 @@ interface Props {
 export const CompletedItem: FC<Props> = ({todo}) => {
     return (
         <S.CompletedItemContainer>
-            <span><s>{todo?.text}</s></span>
+            <span><s>{todo?.text?.original}</s></span>
         </S.CompletedItemContainer>
     );
 };
