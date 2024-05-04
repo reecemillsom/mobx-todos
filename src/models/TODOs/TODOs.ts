@@ -24,15 +24,18 @@ export default class TODOs {
         this.todos = [todo, ...this.todos];
     }
 
-    removeTodo(id: string): void {
+    removeTodo = (id: string): void => {
+        const todo = this.todos.find(todo => todo.id === id);
+        todo?.setDeleted();
+
         this.todos = this.todos.filter((todo) => todo.id !== id);
     }
 
     get pendingItems(): TODO[] {
-        return this.todos.filter(todo => !todo.completed);
+        return this.todos.filter(todo => !todo.getCompleted() && !todo.getDeleted());
     }
 
     get completedItems(): TODO[] {
-        return this.todos.filter(todo => todo.completed);
+        return this.todos.filter(todo => todo.getCompleted());
     }
 }

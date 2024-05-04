@@ -24,7 +24,8 @@ export const PendingList: FC<Props> = observer(({todos}) => {
                 </Stack>
             </S.PendingListHeadingContainer>
 
-            <div>{todos?.pendingItems.map(todo => <TODOItem todo={todo} key={todo.id}/>)}</div>
+            <div>{todos?.pendingItems.map(todo => <TODOItem todo={todo} removeTodo={todos?.removeTodo}
+                                                            key={todo.id}/>)}</div>
         </div>
     )
 })
