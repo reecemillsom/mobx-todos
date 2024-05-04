@@ -11,7 +11,8 @@ export default class TODOs {
             createTodo: action,
             removeTodo: action,
             pendingItems: computed,
-            completedItems: computed
+            completedItems: computed,
+            isItemAlreadyBeingEdited: computed,
         });
 
         this.todos = TODOS.map(todo => new TODO(todo));
@@ -37,5 +38,9 @@ export default class TODOs {
 
     get completedItems(): TODO[] {
         return this.todos.filter(todo => todo.getCompleted());
+    }
+
+    get isItemAlreadyBeingEdited(): boolean {
+        return this.todos.some(todo => todo.getEditing());
     }
 }

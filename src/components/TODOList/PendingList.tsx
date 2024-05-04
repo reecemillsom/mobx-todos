@@ -12,14 +12,14 @@ interface Props {
 }
 
 export const PendingList: FC<Props> = observer(({todos}) => {
-    // TODO instead of TODOItem on line 27 a PendingListItem should be rendered.
     return (
         <div>
             <S.PendingListHeadingContainer>
                 <Heading as="h2">Pending</Heading>
 
                 <Stack direction='row' spacing={4}>
-                    <Button rightIcon={<SmallAddIcon/>} variant="solid" onClick={() => todos?.createTodo()}>
+                    <Button rightIcon={<SmallAddIcon/>} variant="solid" onClick={() => todos?.createTodo()}
+                            isDisabled={todos?.isItemAlreadyBeingEdited}>
                         Add TODO
                     </Button>
                 </Stack>
@@ -29,6 +29,7 @@ export const PendingList: FC<Props> = observer(({todos}) => {
                 <NothingToShow text={"No Pending TODOs"}/>
             ) : (
                 <div>{todos?.pendingItems.map(todo => <TODOItem todo={todo} removeTodo={todos?.removeTodo}
+                                                                isItemAlreadyBeingEdited={todos?.isItemAlreadyBeingEdited}
                                                                 key={todo.id}/>)}</div>
             )}
         </div>

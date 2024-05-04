@@ -9,9 +9,10 @@ import * as S from "./styles";
 interface Props {
     todo: TODO;
     removeTodo: (id: string) => void;
+    isItemAlreadyBeingEdited: boolean;
 }
 
-export const TODOItem: FC<Props> = observer(({todo, removeTodo}) => {
+export const TODOItem: FC<Props> = observer(({todo, removeTodo, isItemAlreadyBeingEdited}) => {
     return (
         <S.TODOContainer>
             <S.TODOContentContainer>
@@ -19,12 +20,12 @@ export const TODOItem: FC<Props> = observer(({todo, removeTodo}) => {
                                         onChange={(e) => todo?.setText(e?.target?.value, 'updated')}/> :
                     <span>{todo?.text?.updated || todo?.text?.original}</span>}
             </S.TODOContentContainer>
-            <S.TODOButtonsContainer>
 
+            <S.TODOButtonsContainer>
                 {!todo?.editing ? (
                     <>
                         <S.StateButton aria-label="Edit" title="Edit" onClick={() => todo?.setEditing(true)}
-                                       icon={<EditIcon/>}/>
+                                       icon={<EditIcon/>} isDisabled={isItemAlreadyBeingEdited}/>
                         <S.StateButton aria-label="Complete" title="Complete" onClick={() => todo?.setCompleted()}
                                        icon={<CheckIcon/>}/>
                         <S.StateButton aria-label="Delete" title="Delete" onClick={() => removeTodo(todo?.id)}
