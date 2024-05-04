@@ -11,8 +11,6 @@ interface Props {
     removeTodo: (id: string) => void;
 }
 
-// TODO set deleted. If in edit mode, show a different item.
-// TODO change this to a PendingListItem, and render a edit item or regular item.
 export const TODOItem: FC<Props> = observer(({todo, removeTodo}) => {
     return (
         <S.TODOContainer>
@@ -25,14 +23,19 @@ export const TODOItem: FC<Props> = observer(({todo, removeTodo}) => {
 
                 {!todo?.editing ? (
                     <>
-                        <S.StateButton aria-label="Edit" onClick={() => todo?.setEditing(true)} icon={<EditIcon/>}/>
-                        <S.StateButton aria-label="Complete" onClick={() => todo?.setCompleted()} icon={<CheckIcon/>}/>
-                        <S.StateButton aria-label="Delete" onClick={() => removeTodo(todo?.id)} icon={<DeleteIcon/>}/>
+                        <S.StateButton aria-label="Edit" title="Edit" onClick={() => todo?.setEditing(true)}
+                                       icon={<EditIcon/>}/>
+                        <S.StateButton aria-label="Complete" title="Complete" onClick={() => todo?.setCompleted()}
+                                       icon={<CheckIcon/>}/>
+                        <S.StateButton aria-label="Delete" title="Delete" onClick={() => removeTodo(todo?.id)}
+                                       icon={<DeleteIcon/>}/>
                     </>
                 ) : (
                     <>
-                        <S.StateButton aria-label="Cancel" onClick={() => todo?.cancelEdit()} icon={<CloseIcon/>}/>
-                        <S.StateButton aria-label="Accept" onClick={() => todo?.acceptEdit()} icon={<CheckIcon/>}/>
+                        <S.StateButton aria-label="Cancel" title="Cancel" onClick={() => todo?.cancelEdit()}
+                                       icon={<CloseIcon/>}/>
+                        <S.StateButton aria-label="Accept" title="Accept" onClick={() => todo?.acceptEdit()}
+                                       icon={<CheckIcon/>}/>
                     </>
                 )}
             </S.TODOButtonsContainer>
