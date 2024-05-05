@@ -1,17 +1,21 @@
 import {action, computed, makeObservable, observable} from "mobx";
 import TODO from "../TODO/TODO";
 import TODOS from "../../constants/TODOs";
+import {AlertStatus} from "@chakra-ui/react";
 
 interface Toast {
     show: boolean;
+    status: AlertStatus | '';
     message: string;
 }
 
 // TODO should create setters for todos and toast, rather than setting create, remove and so on as actions themselves.
+// TODO if todo cannot be found, we should return early.
 export default class TODOs {
     todos: TODO[] = [];
     toast: Toast = {
         show: false,
+        status: '',
         message: ''
     };
 
@@ -19,30 +23,28 @@ export default class TODOs {
         makeObservable(this, {
             todos: observable,
             toast: observable,
-            createTodo: action,
-            removeTodo: action,
-            handleCancel: action,
-            handleAccept: action,
+            setTodos: action,
+            setToast: action,
             pendingItems: computed,
             completedItems: computed,
             isItemAlreadyBeingEditedOrCreated: computed,
         });
 
-        this.todos = TODOS.map(todo => new TODO(todo));
+        this.setTodos(TODOS.map(todo => new TODO(todo)));
     }
 
     createTodo(): void {
         const todo = new TODO();
         todo.setCreating(true);
 
-        this.todos = [todo, ...this.todos];
+        this.setTodos([todo, ...this.todos]);
     }
 
     removeTodo = (id: string): void => {
         const todo = this.todos.find(todo => todo.id === id);
         todo?.setDeleted();
 
-        this.todos = this.todos.filter((todo) => todo.id !== id);
+        this.setTodos(this.todos.filter((todo) => todo.id !== id));
     }
 
     handleCancel = (id: string, itemType: 'creating' | 'editing'): void => {
@@ -50,7 +52,7 @@ export default class TODOs {
         const itemTypes: { [key: string]: () => void; } = {
             creating: () => {
                 todo?.setCreating(false);
-                this.todos = this.todos.filter((todo) => todo.id !== id);
+                this.setTodos(this.todos.filter((todo) => todo.id !== id));
             },
             editing: () => todo?.cancelEdit(),
         }
@@ -64,10 +66,11 @@ export default class TODOs {
         const itemTypes: { [key: string]: () => void } = {
             creating: () => {
                 if (!todo?.getText()?.updated) {
-                    this.toast = {
+                    this.setToast({
                         show: true,
+                        status: 'warning',
                         message: 'Please enter a title before accepting.'
-                    };
+                    });
                 } else {
                     // TODO should we have acceptance and cancellation logic for creation
                     todo?.acceptEdit();
@@ -92,5 +95,13 @@ export default class TODOs {
 
     get isItemAlreadyBeingEditedOrCreated(): boolean {
         return this.todos.some(todo => todo.getEditing() || todo?.getCreating());
+    }
+
+    setTodos(todos: TODO[]): void {
+        this.todos = todos;
+    }
+
+    setToast(toast: Toast): void {
+        this.toast = toast;
     }
 }

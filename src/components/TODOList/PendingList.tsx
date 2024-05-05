@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from "react";
 import {observer} from "mobx-react";
-import {Button, Heading, Stack, useToast} from "@chakra-ui/react";
+import {AlertStatus, Button, Heading, Stack, useToast} from "@chakra-ui/react";
 import {SmallAddIcon} from "@chakra-ui/icons";
 import {PendingItem} from "../TODOItem/PendingItem";
 import TODOs from "../../models/TODOs/TODOs";
@@ -13,19 +13,16 @@ interface Props {
 
 export const PendingList: FC<Props> = observer(({todos}) => {
     const toast = useToast();
-    const {show, message} = todos?.toast;
+    const {show, message, status} = todos?.toast;
 
     useEffect(() => {
         if (show) {
             toast({
-                title: 'Cannot create',
                 description: message,
-                status: 'warning'
+                status: status as AlertStatus
             });
-            // TODO reset toast, is this crucial?
-
         }
-    }, [todos?.toast]);
+    }, [show, message, status, toast]);
 
     return (
         <div>
