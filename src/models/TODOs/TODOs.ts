@@ -9,7 +9,8 @@ interface Toast {
     message: string;
 }
 
-// TODO should create setters for todos and toast, rather than setting create, remove and so on as actions themselves.
+type ItemType = 'creating' | 'editing';
+
 // TODO if todo cannot be found, we should return early.
 export default class TODOs {
     todos: TODO[] = [];
@@ -47,7 +48,7 @@ export default class TODOs {
         this.setTodos(this.todos.filter((todo) => todo.id !== id));
     }
 
-    handleCancel = (id: string, itemType: 'creating' | 'editing'): void => {
+    handleCancel = (id: string, itemType: ItemType): void => {
         const todo = this.todos.find(todo => todo.id === id);
         const itemTypes: { [key: string]: () => void; } = {
             creating: () => {
@@ -60,7 +61,7 @@ export default class TODOs {
         itemTypes[itemType]();
     }
 
-    handleAccept = (id: string, itemType: 'creating' | 'editing'): void => {
+    handleAccept = (id: string, itemType: ItemType): void => {
         const todo = this.todos.find(todo => todo.id === id);
 
         const itemTypes: { [key: string]: () => void } = {
