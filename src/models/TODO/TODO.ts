@@ -34,7 +34,7 @@ export default class TODO {
             setCompleted: action,
             setDeleted: action,
         });
-
+        
         this.setText(data?.text ?? '', 'original');
         data?.completed && this.setCompleted();
     }
