@@ -89,4 +89,15 @@ export default class TODO {
         this.setText(this.text?.original, 'updated');
         this.setEditing(false);
     }
+
+    acceptCreate(): void {
+        this.setText(this.text?.updated, 'original');
+        this.setText('', 'updated');
+        this.setCreating(false);
+    }
+
+    cancelCreate(): void {
+        this.setText('', 'updated');
+        this.setCreating(false);
+    }
 }

@@ -52,7 +52,7 @@ export default class TODOs {
         const todo = this.todos.find(todo => todo.id === id);
         const itemTypes: { [key: string]: () => void; } = {
             creating: () => {
-                todo?.setCreating(false);
+                todo?.cancelCreate();
                 this.setTodos(this.todos.filter((todo) => todo.id !== id));
             },
             editing: () => todo?.cancelEdit(),
@@ -73,14 +73,20 @@ export default class TODOs {
                         message: 'Please enter a title before accepting.'
                     });
                 } else {
-                    // TODO should we have acceptance and cancellation logic for creation
-                    todo?.acceptEdit();
-                    todo?.setCreating(false);
+                    todo?.acceptCreate();
                 }
             },
             editing: () => {
-                // TODO this should probably have some logic like line 69 if condition.
-                todo?.acceptEdit();
+                // TODO this should probably have some logic like line 69 if condition. Test this logic
+                if (!todo?.getText()?.updated) {
+                    this.setToast({
+                        show: true,
+                        status: 'warning',
+                        message: 'Updated item must have a title.'
+                    });
+                } else {
+                    todo?.acceptEdit();
+                }
             }
         };
 
