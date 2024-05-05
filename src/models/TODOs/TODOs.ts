@@ -79,6 +79,7 @@ export default class TODOs {
                 }
             },
             editing: () => {
+                // TODO this should probably have some logic like line 69 if condition.
                 todo?.acceptEdit();
             }
         };

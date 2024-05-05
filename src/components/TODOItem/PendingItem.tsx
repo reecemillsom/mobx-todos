@@ -21,6 +21,8 @@ export const PendingItem: FC<Props> = observer(({
                                                     cancel,
                                                     isItemAlreadyBeingEditedOrCreated
                                                 }) => {
+    const itemType = todo?.editing ? 'editing' : 'creating';
+
     return (
         <S.TODOContainer>
             <S.TODOContentContainer>
@@ -34,10 +36,10 @@ export const PendingItem: FC<Props> = observer(({
                 {(todo?.creating || todo?.editing) ? (
                     <>
                         <S.StateButton aria-label="Cancel" title="Cancel"
-                                       onClick={() => cancel(todo?.id, todo?.editing ? 'editing' : 'creating')}
+                                       onClick={() => cancel(todo?.id, itemType)}
                                        icon={<CloseIcon/>}/>
                         <S.StateButton aria-label="Accept" title="Accept"
-                                       onClick={() => accept(todo?.id, todo?.editing ? 'editing' : 'creating')}
+                                       onClick={() => accept(todo?.id, itemType)}
                                        icon={<CheckIcon/>}/>
                     </>
                 ) : (
