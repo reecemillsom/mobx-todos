@@ -1,8 +1,8 @@
-import React, {FC} from "react";
+import React, {FC, useEffect} from "react";
 import {observer} from "mobx-react";
-import {Button, Heading, Stack} from "@chakra-ui/react";
+import {Button, Heading, Stack, useToast} from "@chakra-ui/react";
 import {SmallAddIcon} from "@chakra-ui/icons";
-import {TODOItem} from "../TODOItem/TODOItem";
+import {PendingItem} from "../TODOItem/PendingItem";
 import TODOs from "../../models/TODOs/TODOs";
 import * as S from './styles';
 import {NothingToShow} from "../NothingToShow/NothingToShow";
@@ -12,6 +12,21 @@ interface Props {
 }
 
 export const PendingList: FC<Props> = observer(({todos}) => {
+    const toast = useToast();
+    const {show, message} = todos?.toast;
+
+    useEffect(() => {
+        if (show) {
+            toast({
+                title: 'Cannot create',
+                description: message,
+                status: 'warning'
+            });
+            // TODO reset toast, is this crucial?
+
+        }
+    }, [todos?.toast]);
+
     return (
         <div>
             <S.PendingListHeadingContainer>
@@ -19,7 +34,7 @@ export const PendingList: FC<Props> = observer(({todos}) => {
 
                 <Stack direction='row' spacing={4}>
                     <Button rightIcon={<SmallAddIcon/>} variant="solid" onClick={() => todos?.createTodo()}
-                            isDisabled={todos?.isItemAlreadyBeingEdited}>
+                            isDisabled={todos?.isItemAlreadyBeingEditedOrCreated}>
                         Add TODO
                     </Button>
                 </Stack>
@@ -28,9 +43,13 @@ export const PendingList: FC<Props> = observer(({todos}) => {
             {!todos?.pendingItems?.length ? (
                 <NothingToShow text={"No Pending TODOs"}/>
             ) : (
-                <div>{todos?.pendingItems.map(todo => <TODOItem todo={todo} removeTodo={todos?.removeTodo}
-                                                                isItemAlreadyBeingEdited={todos?.isItemAlreadyBeingEdited}
-                                                                key={todo.id}/>)}</div>
+                <div>{todos?.pendingItems.map(todo => (
+                    <PendingItem todo={todo} removeTodo={todos?.removeTodo}
+                                 accept={todos?.handleAccept}
+                                 cancel={todos?.handleCancel}
+                                 isItemAlreadyBeingEditedOrCreated={todos?.isItemAlreadyBeingEditedOrCreated}
+                                 key={todo.id}/>)
+                )}</div>
             )}
         </div>
     )

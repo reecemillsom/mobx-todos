@@ -18,6 +18,7 @@ export default class TODO {
         updated: ''
     };
     editing: boolean = false;
+    creating: boolean = false;
     completed: boolean = false;
     deleted: boolean = false;
 
@@ -25,8 +26,10 @@ export default class TODO {
         makeObservable(this, {
             text: observable,
             editing: observable,
+            creating: observable,
             completed: observable,
             setEditing: action,
+            setCreating: action,
             setText: action,
             setCompleted: action,
             setDeleted: action,
@@ -44,6 +47,10 @@ export default class TODO {
         this.editing = editing;
     }
 
+    setCreating(editing: boolean) {
+        this.creating = editing;
+    }
+
     setCompleted() {
         this.completed = true;
     }
@@ -58,6 +65,10 @@ export default class TODO {
 
     getEditing(): boolean {
         return this.editing;
+    }
+
+    getCreating(): boolean {
+        return this.creating;
     }
 
     getCompleted(): boolean {
