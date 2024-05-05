@@ -77,7 +77,6 @@ export default class TODOs {
                 }
             },
             editing: () => {
-                // TODO this should probably have some logic like line 69 if condition. Test this logic
                 if (!todo?.getText()?.updated) {
                     this.setToast({
                         show: true,
