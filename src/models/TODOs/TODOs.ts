@@ -9,7 +9,7 @@ interface Toast {
     message: string;
 }
 
-type ItemType = 'creating' | 'editing';
+export type ItemType = 'creating' | 'editing';
 
 // TODO if todo cannot be found, we should return early.
 export default class TODOs {

@@ -1,6 +1,6 @@
 import {FC} from "react";
-import * as S from './styles';
 import TODO from "../../models/TODO/TODO";
+import * as S from './styles';
 
 interface Props {
     todo: TODO;

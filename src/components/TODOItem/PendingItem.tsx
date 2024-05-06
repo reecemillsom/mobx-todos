@@ -3,14 +3,14 @@ import {observer} from "mobx-react";
 import {Input} from '@chakra-ui/react';
 import {CheckIcon, CloseIcon, DeleteIcon, EditIcon} from '@chakra-ui/icons';
 import TODO from "../../models/TODO/TODO";
-
+import {ItemType} from "../../models/TODOs/TODOs";
 import * as S from "./styles";
 
 interface Props {
     todo: TODO;
     removeTodo: (id: string) => void;
-    accept: (id: string, itemType: 'creating' | 'editing') => void;
-    cancel: (id: string, itemType: 'creating' | 'editing') => void;
+    accept: (id: string, itemType: ItemType) => void;
+    cancel: (id: string, itemType: ItemType) => void;
     isItemAlreadyBeingEditedOrCreated: boolean;
 }
 
