@@ -31,7 +31,7 @@ export const PendingItem: FC<Props> = observer(({
                            defaultValue={todo?.text?.original}
                            autoFocus={true}
                            onChange={(e) => todo?.setText(e?.target?.value, 'updated')}/> :
-                    <span>{todo?.text?.updated || todo?.text?.original}</span>}
+                    <S.TODOTitle>{todo?.text?.original}</S.TODOTitle>}
             </S.TODOContentContainer>
 
             <S.TODOButtonsContainer>

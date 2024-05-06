@@ -77,7 +77,9 @@ export default class TODOs {
                 }
             },
             editing: () => {
-                if (!todo?.getText()?.updated) {
+                const text = todo?.getText();
+
+                if (!text?.original && !text?.updated) {
                     this.setToast({
                         show: true,
                         status: 'warning',
