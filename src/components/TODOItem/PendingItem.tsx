@@ -27,9 +27,10 @@ export const PendingItem: FC<Props> = observer(({
         <S.TODOContainer>
             <S.TODOContentContainer>
                 {(todo?.editing || todo?.creating) ?
-                    <Input placeholder="Enter TODO"
+                    <Input placeholder="Enter Title"
                            defaultValue={todo?.text?.original}
                            autoFocus={true}
+                           onFocus={(e) => todo?.setText(e?.target?.value, 'updated')}
                            onChange={(e) => todo?.setText(e?.target?.value, 'updated')}/> :
                     <S.TODOTitle>{todo?.text?.original}</S.TODOTitle>}
             </S.TODOContentContainer>

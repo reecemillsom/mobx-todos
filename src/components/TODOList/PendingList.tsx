@@ -22,8 +22,10 @@ export const PendingList: FC<Props> = observer(({todos}) => {
                 description: message,
                 status: status as AlertStatus
             });
+
+            todos.setToastToDefault();
         }
-    }, [show, message, status, toast]);
+    }, [show, message, status, toast, todos]);
 
     return (
         <div>

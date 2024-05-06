@@ -146,7 +146,7 @@ describe('TODOs', () => {
                     expect(todos.toast).toEqual({
                         show: true,
                         status: 'warning',
-                        message: 'Please enter a title before accepting.'
+                        message: 'Please enter a title before creating.'
                     });
                 });
             });
@@ -177,6 +177,69 @@ describe('TODOs', () => {
                     todos.handleAccept('some-generated-id-2', 'creating');
 
                     expect(acceptCreateSpy).toHaveBeenCalledTimes(1);
+                });
+            });
+        });
+
+        describe('when updating a TODO', () => {
+            describe('when todo has no text', () => {
+                let getTextSpy: jest.SpyInstance;
+                beforeEach(() => {
+                    getTextSpy = jest.fn();
+
+                    const getTodoMock = (n: number) => ({
+                        id: `some-generated-id-${n}`,
+                        getText: getTextSpy.mockReturnValue({
+                            updated: ''
+                        })
+                    });
+
+                    (TODO as jest.MockedClass<any>).mockImplementationOnce(
+                        () => getTodoMock(1)
+                    ).mockImplementationOnce(() => getTodoMock(2))
+                        .mockImplementationOnce(() => getTodoMock(3))
+                        .mockImplementationOnce(() => getTodoMock(4))
+                });
+
+                it('should set the toast info', () => {
+                    const todos = new TODOs();
+
+                    todos.handleAccept('some-generated-id-4', 'editing');
+
+                    expect(todos.toast).toEqual({
+                        show: true,
+                        status: 'warning',
+                        message: 'Please enter a title before updating.'
+                    });
+                });
+            });
+
+            describe('when todo has text', () => {
+                let acceptEditSpy: jest.SpyInstance;
+                beforeEach(() => {
+                    acceptEditSpy = jest.fn()
+
+                    const getMockedTodo = (n: number) => ({
+                        id: `some-generated-id-${n}`,
+                        getText: jest.fn().mockReturnValue({
+                            updated: `some-text-value`,
+                        }),
+                        acceptEdit: acceptEditSpy
+                    });
+
+                    (TODO as jest.MockedClass<any>).mockImplementationOnce(
+                        () => getMockedTodo(1)
+                    ).mockImplementationOnce(() => getMockedTodo(2))
+                        .mockImplementationOnce(() => getMockedTodo(3))
+                        .mockImplementationOnce(() => getMockedTodo(4))
+                });
+
+                it('should call accept edit', () => {
+                    const todos = new TODOs();
+
+                    todos.handleAccept('some-generated-id-2', 'editing');
+
+                    expect(acceptEditSpy).toHaveBeenCalledTimes(1);
                 });
             });
         });
