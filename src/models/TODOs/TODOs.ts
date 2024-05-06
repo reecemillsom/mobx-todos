@@ -1,7 +1,7 @@
 import {action, computed, makeObservable, observable} from "mobx";
+import {AlertStatus} from "@chakra-ui/react";
 import TODO from "../TODO/TODO";
 import TODOS from "../../constants/TODOs";
-import {AlertStatus} from "@chakra-ui/react";
 
 interface Toast {
     show: boolean;
