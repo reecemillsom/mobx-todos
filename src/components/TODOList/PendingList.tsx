@@ -3,9 +3,9 @@ import {observer} from "mobx-react";
 import {AlertStatus, Button, Heading, Stack, useToast} from "@chakra-ui/react";
 import {SmallAddIcon} from "@chakra-ui/icons";
 import {PendingItem} from "../TODOItem/PendingItem";
+import {NothingToShow} from "../NothingToShow/NothingToShow";
 import TODOs from "../../models/TODOs/TODOs";
 import * as S from './styles';
-import {NothingToShow} from "../NothingToShow/NothingToShow";
 
 interface Props {
     todos: TODOs;
@@ -15,6 +15,7 @@ export const PendingList: FC<Props> = observer(({todos}) => {
     const toast = useToast();
     const {show, message, status} = todos?.toast;
 
+    // TODO could use a reaction function from MobX but I do not see the benefit of doing that.
     useEffect(() => {
         if (show) {
             toast({
