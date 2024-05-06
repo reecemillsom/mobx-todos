@@ -10,6 +10,13 @@ export const TODOContainer = styled.div`
 export const TODOContentContainer = styled.div`
     display: flex;
     justify-content: flex-start;
+    width: 50%;
+`;
+
+export const TODOTitle = styled.span`
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 `;
 
 export const TODOButtonsContainer = styled.div`
