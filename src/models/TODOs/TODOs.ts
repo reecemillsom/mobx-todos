@@ -11,14 +11,15 @@ interface Toast {
 
 export type ItemType = 'creating' | 'editing';
 
-// TODO if todo cannot be found, we should return early.
+export const DEFAULT_TOAST_VALUES: Toast = {
+    show: false,
+    status: '',
+    message: ''
+};
+
 export default class TODOs {
     todos: TODO[] = [];
-    toast: Toast = {
-        show: false,
-        status: '',
-        message: ''
-    };
+    toast: Toast = DEFAULT_TOAST_VALUES;
 
     constructor() {
         makeObservable(this, {
@@ -26,6 +27,7 @@ export default class TODOs {
             toast: observable,
             setTodos: action,
             setToast: action,
+            setToastToDefault: action,
             pendingItems: computed,
             completedItems: computed,
             isItemAlreadyBeingEditedOrCreated: computed,
@@ -63,35 +65,20 @@ export default class TODOs {
 
     handleAccept = (id: string, itemType: ItemType): void => {
         const todo = this.todos.find(todo => todo.id === id);
+        const text = todo?.getText();
+        const isCreating = itemType === 'creating';
 
-        const itemTypes: { [key: string]: () => void } = {
-            creating: () => {
-                if (!todo?.getText()?.updated) {
-                    this.setToast({
-                        show: true,
-                        status: 'warning',
-                        message: 'Please enter a title before accepting.'
-                    });
-                } else {
-                    todo?.acceptCreate();
-                }
-            },
-            editing: () => {
-                const text = todo?.getText();
+        if (!text?.updated) {
+            this.setToast({
+                show: true,
+                status: 'warning',
+                message: isCreating ? 'Please enter a title before creating.' : 'Please enter a title before updating.'
+            });
 
-                if (!text?.original && !text?.updated) {
-                    this.setToast({
-                        show: true,
-                        status: 'warning',
-                        message: 'Updated item must have a title.'
-                    });
-                } else {
-                    todo?.acceptEdit();
-                }
-            }
-        };
+            return;
+        }
 
-        itemTypes[itemType]();
+        isCreating ? todo?.acceptCreate() : todo?.acceptEdit();
     }
 
     get pendingItems(): TODO[] {
@@ -112,5 +99,9 @@ export default class TODOs {
 
     setToast(toast: Toast): void {
         this.toast = toast;
+    }
+
+    setToastToDefault(): void {
+        this.toast = DEFAULT_TOAST_VALUES;
     }
 }

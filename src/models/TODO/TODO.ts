@@ -80,7 +80,7 @@ export default class TODO {
     }
 
     acceptEdit(): void {
-        this.setText(this.text?.updated || this.text?.original, 'original');
+        this.setText(this.text?.updated, 'original');
         this.setText('', 'updated');
         this.setEditing(false)
     }
