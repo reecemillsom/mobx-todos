@@ -11,6 +11,10 @@ export const TODOContentContainer = styled.div`
     display: flex;
     justify-content: flex-start;
     width: 50%;
+
+    @media screen and (min-width: 48em) {
+        width: 75%;
+    }
 `;
 
 export const TODOTitle = styled.span`
