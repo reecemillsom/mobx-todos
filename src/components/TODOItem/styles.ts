@@ -34,3 +34,18 @@ export const CompletedItemContainer = styled.div`
     ${listContainer};
     justify-content: flex-start;
 `
+
+export const DesktopMenuItems = styled.div`
+    display: none;
+    @media screen and (min-width: 48em) {
+        display: block;
+    }
+`;
+
+export const MobileMenuItems = styled.div`
+    display: block;
+
+    @media screen and (min-width: 48em) {
+        display: none;
+    }
+`;

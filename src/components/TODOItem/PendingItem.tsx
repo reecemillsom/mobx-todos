@@ -1,10 +1,11 @@
 import {FC} from 'react';
 import {observer} from "mobx-react";
 import {Input} from '@chakra-ui/react';
-import {CheckIcon, CloseIcon, DeleteIcon, EditIcon} from '@chakra-ui/icons';
+import {CheckIcon, CloseIcon} from '@chakra-ui/icons';
 import TODO from "../../models/TODO/TODO";
 import {ItemType} from "../../models/TODOs/TODOs";
 import * as S from "./styles";
+import {MenuOptions} from "./MenuOptions/MenuOptions";
 
 interface Props {
     todo: TODO;
@@ -47,12 +48,13 @@ export const PendingItem: FC<Props> = observer(({
                     </>
                 ) : (
                     <>
-                        <S.StateButton aria-label="Edit" title="Edit" onClick={() => todo?.setEditing(true)}
-                                       icon={<EditIcon/>} isDisabled={isItemAlreadyBeingEditedOrCreated}/>
-                        <S.StateButton aria-label="Complete" title="Complete" onClick={() => todo?.setCompleted()}
-                                       icon={<CheckIcon/>}/>
-                        <S.StateButton aria-label="Delete" title="Delete" onClick={() => removeTodo(todo?.id)}
-                                       icon={<DeleteIcon/>}/>
+                        <MenuOptions
+                            todoId={todo?.id}
+                            setEditing={todo?.setEditing}
+                            setCompleted={todo?.setCompleted}
+                            removeTodo={removeTodo}
+                            itemBeingEditedOrCreated={isItemAlreadyBeingEditedOrCreated}
+                        />
                     </>
                 )}
             </S.TODOButtonsContainer>

@@ -39,64 +39,64 @@ export default class TODO {
         data?.completed && this.setCompleted();
     }
 
-    setText(text: string, field: keyof Text) {
+    setText = (text: string, field: keyof Text) => {
         this.text[field] = text;
     }
 
-    setEditing(editing: boolean) {
+    setEditing = (editing: boolean) => {
         this.editing = editing;
     }
 
-    setCreating(editing: boolean) {
-        this.creating = editing;
+    setCreating = (creating: boolean) => {
+        this.creating = creating;
     }
 
-    setCompleted() {
+    setCompleted = () => {
         this.completed = true;
     }
 
-    setDeleted() {
+    setDeleted = () => {
         this.deleted = true;
     }
 
-    getText(): Text {
+    getText = (): Text => {
         return this.text;
     }
 
-    getEditing(): boolean {
+    getEditing = (): boolean => {
         return this.editing;
     }
 
-    getCreating(): boolean {
+    getCreating = (): boolean => {
         return this.creating;
     }
 
-    getCompleted(): boolean {
+    getCompleted = (): boolean => {
         return this.completed;
     }
 
-    getDeleted(): boolean {
+    getDeleted = (): boolean => {
         return this.deleted;
     }
 
-    acceptEdit(): void {
+    acceptEdit = (): void => {
         this.setText(this.text?.updated, 'original');
         this.setText('', 'updated');
         this.setEditing(false)
     }
 
-    cancelEdit(): void {
+    cancelEdit = (): void => {
         this.setText(this.text?.original, 'updated');
         this.setEditing(false);
     }
 
-    acceptCreate(): void {
+    acceptCreate = (): void => {
         this.setText(this.text?.updated, 'original');
         this.setText('', 'updated');
         this.setCreating(false);
     }
 
-    cancelCreate(): void {
+    cancelCreate = (): void => {
         this.setText('', 'updated');
         this.setCreating(false);
     }
