@@ -4,8 +4,8 @@ import {Input} from '@chakra-ui/react';
 import {CheckIcon, CloseIcon} from '@chakra-ui/icons';
 import TODO from "../../models/TODO/TODO";
 import {ItemType} from "../../models/TODOs/TODOs";
+import {MenuOptions} from "./MenuOptions";
 import * as S from "./styles";
-import {MenuOptions} from "./MenuOptions/MenuOptions";
 
 interface Props {
     todo: TODO;

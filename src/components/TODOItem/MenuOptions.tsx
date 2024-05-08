@@ -1,7 +1,8 @@
 import {FC} from "react";
 import {IconButton, Menu, MenuButton, MenuItem, MenuList} from "@chakra-ui/react";
-import {CheckIcon, DeleteIcon, EditIcon, HamburgerIcon} from "@chakra-ui/icons";
-import * as S from "../styles";
+import {CheckIcon, DeleteIcon, EditIcon} from "@chakra-ui/icons";
+import {DotsMenu} from "../icons/DotsMenu";
+import * as S from "./styles";
 
 interface Props {
     todoId: string;
@@ -31,7 +32,7 @@ export const MenuOptions: FC<Props> = ({
 
             <S.MobileMenuItems>
                 <Menu>
-                    <MenuButton as={IconButton} aria-label="Options" icon={<HamburgerIcon/>} variant="outline"
+                    <MenuButton as={IconButton} aria-label="Options" icon={<DotsMenu/>} variant="outline"
                                 isDisabled={itemBeingEditedOrCreated}/>
                     <MenuList>
                         <MenuItem icon={<EditIcon/>} onClick={() => setEditing(true)}>
