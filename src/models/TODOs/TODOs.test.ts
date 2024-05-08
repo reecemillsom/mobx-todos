@@ -17,11 +17,30 @@ describe('TODOs', () => {
     });
 
     describe('when creating a TODO', () => {
+        let setCreatingSpy: jest.SpyInstance;
+        beforeEach(() => {
+            setCreatingSpy = jest.fn();
+
+            const getMockedTodo = (n: number) => ({
+                id: `some-generated-id-${n}`,
+                setCreating: setCreatingSpy
+            });
+
+            (TODO as jest.MockedClass<any>).mockImplementationOnce(
+                () => getMockedTodo(1)
+            )
+                .mockImplementationOnce(() => getMockedTodo(2))
+                .mockImplementationOnce(() => getMockedTodo(3))
+                .mockImplementationOnce(() => getMockedTodo(4))
+                .mockImplementationOnce(() => getMockedTodo(5))
+        });
+
         it('should set the state correctly', () => {
             const todos = new TODOs();
 
             todos.createTodo();
 
+            expect(setCreatingSpy).toHaveBeenCalledTimes(1);
             expect(todos.todos).toHaveLength(5);
         });
     });
