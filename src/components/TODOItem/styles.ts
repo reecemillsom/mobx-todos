@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import {IconButton} from "@chakra-ui/react";
 import {listContainer} from "./listStyles";
 
@@ -11,6 +11,10 @@ export const TODOContentContainer = styled.div`
     display: flex;
     justify-content: flex-start;
     width: 50%;
+
+    @media screen and (min-width: 48em) {
+        width: 75%;
+    }
 `;
 
 export const TODOTitle = styled.span`
@@ -34,3 +38,18 @@ export const CompletedItemContainer = styled.div`
     ${listContainer};
     justify-content: flex-start;
 `
+
+export const DesktopMenuItems = styled.div`
+    display: none;
+    @media screen and (min-width: 48em) {
+        display: block;
+    }
+`;
+
+export const MobileMenuItems = styled.div`
+    display: block;
+
+    @media screen and (min-width: 48em) {
+        display: none;
+    }
+`;

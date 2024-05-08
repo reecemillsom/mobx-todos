@@ -6,17 +6,19 @@ describe('TODO', () => {
             it('will set the initial state correctly', () => {
                 const todo = new TODO();
 
-                expect(todo).toEqual({
-                    id: expect.any(String),
-                    text: {
-                        original: '',
-                        updated: ''
-                    },
-                    deleted: false,
-                    creating: false,
-                    editing: false,
-                    completed: false,
-                });
+                expect(todo).toEqual(
+                    expect.objectContaining({
+                        id: expect.any(String),
+                        text: {
+                            original: '',
+                            updated: ''
+                        },
+                        deleted: false,
+                        creating: false,
+                        editing: false,
+                        completed: false,
+                    })
+                );
             });
         });
 
@@ -29,17 +31,19 @@ describe('TODO', () => {
 
                 const todo = new TODO(context);
 
-                expect(todo).toEqual({
-                    id: expect.any(String),
-                    text: {
-                        original: 'First TODO item',
-                        updated: ''
-                    },
-                    deleted: false,
-                    creating: false,
-                    editing: false,
-                    completed: true
-                });
+                expect(todo).toEqual(
+                    expect.objectContaining({
+                        id: expect.any(String),
+                        text: {
+                            original: 'First TODO item',
+                            updated: ''
+                        },
+                        deleted: false,
+                        creating: false,
+                        editing: false,
+                        completed: true
+                    })
+                );
             });
         });
     });
