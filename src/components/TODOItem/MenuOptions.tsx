@@ -32,7 +32,7 @@ export const MenuOptions: FC<Props> = ({
 
             <S.MobileMenuItems>
                 <Menu>
-                    <MenuButton as={IconButton} aria-label="Options" icon={<DotsMenu/>} variant="outline"
+                    <MenuButton as={IconButton} aria-label="Options" icon={<DotsMenu/>} variant="solid"
                                 isDisabled={itemBeingEditedOrCreated}/>
                     <MenuList>
                         <MenuItem icon={<EditIcon/>} onClick={() => setEditing(true)}>
